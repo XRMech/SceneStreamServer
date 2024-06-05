@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebRTC Test</title>
+</head>
+<body>
+    <h1>WebRTC Test</h1>
+    <video id="video" autoplay></video>
+    <script>
+        async function init() {
+            try {
+                const constraints = {
+                    video: true,
+                    audio: false
+                };
+
+                // Check if getUserMedia is available
+                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+                    const video = document.getElementById('video');
+                    video.srcObject = stream;
+                } else {
+                    console.error('getUserMedia not supported on your browser!');
+                }
+            } catch (err) {
+                console.error('Error accessing media devices.', err);
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>
